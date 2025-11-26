@@ -19,6 +19,7 @@ public class Produto {
 	@Column(nullable = false)
 	private String nome;
 	private String categoria;
+	private BigDecimal preco; 
 	@Column(nullable = false)
 	//Forma de controlar se o produto está disponível ou não sem ter que retirar do banco de dados
 	private boolean ativo = true;
@@ -31,6 +32,7 @@ public class Produto {
 		this.id = id;
 		this.nome = nome;
 		this.categoria = categoria;
+		this.preco = preco;
 		this.ativo = ativo;
 	}
 
@@ -56,6 +58,14 @@ public class Produto {
 
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
+	}
+	
+	public BigDecimal getPreco() {
+		return preco;
+	}
+
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
 	}
 
 	public boolean getAtivo() {
