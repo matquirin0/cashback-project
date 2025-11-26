@@ -1,5 +1,6 @@
-package com.matheuspq.domain;
+package com.matheuspq.domain.loja;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ public class Transacao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Date data;
+	private LocalDateTime data;
 	private double valor;
 	private int pontosGerado;
 	private double cashbackGerado;
@@ -25,7 +26,7 @@ public class Transacao {
 		
 	}
 
-	public Transacao(Long id, Date data, double valor, int pontosGerado, double cashbackGerado, int pontosUtilizado) {
+	public Transacao(Long id, LocalDateTime data, double valor, int pontosGerado, double cashbackGerado, int pontosUtilizado) {
 		super();
 		this.id = id;
 		this.data = data;
@@ -33,6 +34,10 @@ public class Transacao {
 		this.pontosGerado = pontosGerado;
 		this.cashbackGerado = cashbackGerado;
 		this.pontosUtilizado = pontosUtilizado;
+	}
+	
+	public void prePersist() {
+		this.data = LocalDateTime.now();
 	}
 
 	public Long getId() {
@@ -43,11 +48,11 @@ public class Transacao {
 		this.id = id;
 	}
 
-	public Date getData() {
+	public LocalDateTime getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
 

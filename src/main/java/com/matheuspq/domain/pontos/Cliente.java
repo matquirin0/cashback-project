@@ -1,4 +1,4 @@
-package com.matheuspq.domain;
+package com.matheuspq.domain.pontos;
 
 import java.util.Objects;
 

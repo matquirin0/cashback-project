@@ -1,4 +1,4 @@
-package com.matheuspq.domain;
+package com.matheuspq.domain.loja;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -20,17 +20,18 @@ public class Produto {
 	private String nome;
 	private String categoria;
 	@Column(nullable = false)
-	private BigDecimal valor;
+	//Forma de controlar se o produto está disponível ou não sem ter que retirar do banco de dados
+	private boolean ativo = true;
 	
 	public Produto() {
 		
 	}
 
-	public Produto(Long id, String nome, String categoria, BigDecimal valor) {
+	public Produto(Long id, String nome, String categoria, boolean ativo) {
 		this.id = id;
 		this.nome = nome;
 		this.categoria = categoria;
-		this.valor = valor;
+		this.ativo = ativo;
 	}
 
 	public Long getId() {
@@ -57,12 +58,12 @@ public class Produto {
 		this.categoria = categoria;
 	}
 
-	public BigDecimal getValor() {
-		return valor;
+	public boolean getAtivo() {
+		return ativo;
 	}
 
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override
