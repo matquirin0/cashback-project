@@ -1,8 +1,11 @@
 package com.matheuspq.domain.loja;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+
+import com.matheuspq.domain.pontos.Cliente;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,28 +19,21 @@ public class Transacao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private Cliente cliente;
 	private LocalDateTime data;
-	private double valor;
-	private int pontosGerado;
-	private double cashbackGerado;
-	private int pontosUtilizado;
+	private BigDecimal valorTotal;
+	private List<TransacaoProduto> transacaoItem; 
 	
 	public Transacao() {
 		
 	}
 
-	public Transacao(Long id, LocalDateTime data, double valor, int pontosGerado, double cashbackGerado, int pontosUtilizado) {
-		super();
-		this.id = id;
+	public Transacao(Cliente cliente, LocalDateTime data, BigDecimal valorTotal,
+			List<TransacaoProduto> transacaoItem) {
+		this.cliente = cliente;
 		this.data = data;
-		this.valor = valor;
-		this.pontosGerado = pontosGerado;
-		this.cashbackGerado = cashbackGerado;
-		this.pontosUtilizado = pontosUtilizado;
-	}
-	
-	public void prePersist() {
-		this.data = LocalDateTime.now();
+		this.valorTotal = valorTotal;
+		this.transacaoItem = transacaoItem;
 	}
 
 	public Long getId() {
@@ -48,6 +44,14 @@ public class Transacao {
 		this.id = id;
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	public LocalDateTime getData() {
 		return data;
 	}
@@ -56,36 +60,20 @@ public class Transacao {
 		this.data = data;
 	}
 
-	public double getValor() {
-		return valor;
+	public BigDecimal getValorTotal() {
+		return valorTotal;
 	}
 
-	public void setValor(double valor) {
-		this.valor = valor;
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
 	}
 
-	public int getPontosGerado() {
-		return pontosGerado;
+	public List<TransacaoProduto> getTransacaoItem() {
+		return transacaoItem;
 	}
 
-	public void setPontosGerado(int pontosGerado) {
-		this.pontosGerado = pontosGerado;
-	}
-
-	public double getCashbackGerado() {
-		return cashbackGerado;
-	}
-
-	public void setCashbackGerado(double cashbackGerado) {
-		this.cashbackGerado = cashbackGerado;
-	}
-
-	public int getPontosUtilizado() {
-		return pontosUtilizado;
-	}
-
-	public void setPontosUtilizado(int pontosUtilizado) {
-		this.pontosUtilizado = pontosUtilizado;
+	public void setTransacaoItem(List<TransacaoProduto> transacaoItem) {
+		this.transacaoItem = transacaoItem;
 	}
 
 	@Override
@@ -104,6 +92,6 @@ public class Transacao {
 		Transacao other = (Transacao) obj;
 		return Objects.equals(id, other.id);
 	}
-
-
 }
+	
+	
